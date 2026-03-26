@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & FAQ — Pindr</title>
+    <meta name="description" content="Get help with Pindr. FAQs on boards, Google Drive sync, privacy, and more.">
+    <link rel="stylesheet" href="pindr-site.css">
+    <style>
+        .support-header {
+            background: linear-gradient(135deg, #1a4731, #2d6a4f);
+            color: white; padding: 56px 28px; text-align: center;
+        }
+        .support-header h1 {
+            font-family: var(--font-display); font-size: clamp(30px,5vw,46px);
+            font-weight: 700; letter-spacing: -0.8px; margin-bottom: 10px;
+        }
+        .support-header p { font-size: 15px; opacity: 0.8; }
+
+        .faq-item {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.15s;
+        }
+        .faq-item.open { box-shadow: var(--shadow-md); }
+
+        .faq-q {
+            padding: 18px 22px;
+            font-size: 14px; font-weight: 700; color: var(--forest);
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            gap: 12px; user-select: none; transition: background 0.12s;
+        }
+        .faq-q:hover { background: var(--cream); }
+
+        .faq-arrow {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: var(--cream); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; flex-shrink: 0;
+            transition: transform 0.2s, background 0.15s;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); background: var(--mint); border-color: var(--sage); }
+
+        .faq-a {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.2s;
+            font-size: 14px; color: #374151; line-height: 1.75;
+        }
+        .faq-a.open { max-height: 600px; padding: 0 22px 18px; }
+        .faq-a a { color: var(--leaf); font-weight: 500; }
+
+        .contact-hero {
+            background: linear-gradient(135deg, var(--forest), var(--leaf));
+            border-radius: var(--radius); padding: 40px;
+            text-align: center; color: white; margin-top: 40px;
+        }
+        .contact-hero h2 { font-family: var(--font-display); font-size: 22px; margin-bottom: 8px; }
+        .contact-hero p { opacity: 0.8; font-size: 14px; margin-bottom: 20px; }
+        .contact-hero a {
+            display: inline-block; background: white; color: var(--forest);
+            font-weight: 700; font-size: 14px; padding: 11px 24px;
+            border-radius: 8px; text-decoration: none;
+            transition: transform 0.15s;
+        }
+        .contact-hero a:hover { transform: translateY(-1px); }
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+        <img src="icons/icon-48.png" alt="Pindr">
+        <span class="nav-brand-name">Pindr</span>
+    </a>
+    <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="active">Support</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://chrome.google.com/webstore" target="_blank" class="nav-cta">Add to Chrome →</a>
+    </div>
+</nav>
+
+<div class="support-header">
+    <h1>Support & FAQ</h1>
+    <p>Pindr : To-Do Journal · Version 2.1</p>
+</div>
+
+<div class="page-wrap">
+    <div class="highlight-box" style="margin-top:0;">
+        💬 Most questions are answered below. If you still need help, reach out via the Chrome Web Store listing.
+    </div>
+
+    <div class="section-label">Getting Started</div>
+
+    <div class="faq-item">
+        <div class="faq-q">How do I create my first board? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Click the <strong>"New Board"</strong> button in the top-right of the workspace. A new sticky board appears — click the title to rename it and start typing tasks or notes right away.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I pin a board to my popup? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Click the 📌 pin icon in any board's header. Pinned boards appear instantly when you click the Pindr icon in your Chrome toolbar — no need to open the full workspace.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">What's the difference between Checkbox and Bullet mode? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Checkbox mode adds tick-able tasks — great for to-do lists. Bullet mode adds clean bullet points — great for notes and journaling. You can mix both freely in the same board using the toolbar buttons.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">Can I reorder my boards? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Pinned boards always appear at the top. Within sections, boards are ordered by creation date (newest first). Drag-to-reorder is on the roadmap for a future release.</div>
+    </div>
+
+    <div class="section-label">Google Drive Sync</div>
+
+    <div class="faq-item">
+        <div class="faq-q">Is Google Drive sync required? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Not at all. Pindr works perfectly without signing in. All boards are saved locally on your device. Drive sync is an optional backup — useful if you switch computers or want peace of mind.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">What does Pindr access in my Google account? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Only the <code>drive.file</code> scope — meaning Pindr can only see and edit the single file <em>it created</em> (<code>pindr-data.json</code>). It cannot read any other file in your Drive. It also reads your name and profile photo to display in the header.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">Sync says "failed" — what do I do? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Usually this means your Google session expired. Try signing out and signing back in. If it persists, check you have storage space in your Google Drive (free tier gives 15 GB).</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I revoke Drive access? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Click "Sign out" in the Pindr toolbar. To fully revoke access, visit <a href="https://myaccount.google.com/permissions" target="_blank">myaccount.google.com/permissions</a> and remove Pindr from the list.</div>
+    </div>
+
+    <div class="section-label">Data & Privacy</div>
+
+    <div class="faq-item">
+        <div class="faq-q">Where is my data stored? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">All boards and settings are stored in <code>chrome.storage.local</code> on your device. The developer has no server and can see none of your data. If you enable Drive sync, a backup is saved in <em>your personal</em> Google Drive — not on any Pindr server.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">I accidentally deleted a board. Can I recover it? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes! Deleted boards go to the Trash. Boards stay in Trash for 7 days before being permanently removed. Open Settings and find the Trash section to restore any board.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I back up my data? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Click <strong>"Export"</strong> in the toolbar. This saves a complete JSON backup of all your boards, archives, and settings. Re-import it anytime with the <strong>"Import"</strong> button.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">What happens if I uninstall Pindr? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a"><strong>Please export your data first!</strong> Uninstalling removes all locally stored data. If you had Drive sync on, your <code>pindr-data.json</code> will still be in your Google Drive — re-import it after reinstalling.</div>
+    </div>
+
+    <div class="section-label">Features & Tips</div>
+
+    <div class="faq-item">
+        <div class="faq-q">What is Auto Archive? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Every night at midnight, boards created on previous days are automatically moved to the Archive. Your workspace stays clean while your full history is preserved. Access it via the Archive button in the toolbar.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I change the theme? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Click the 🌙 button in the top-right toolbar to cycle through Light, Dark, and Ambient (deep navy) themes. Or open Settings for a visual theme picker with previews.</div>
+    </div>
+    <div class="faq-item">
+        <div class="faq-q">How do I use the "To checks" button? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Select some lines of text in a board, then click "↳ To checks" — those lines will be converted into checkbox rows. If nothing is selected, all plain text in the board is converted.</div>
+    </div>
+
+    <div class="contact-hero">
+        <h2>Still need help? 💬</h2>
+        <p>Found a bug or have a feature idea? Rav reads every message on the Web Store.</p>
+        <a href="https://chrome.google.com/webstore" target="_blank">Contact via Web Store →</a>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-brand">
+                <img src="icons/icon-48.png" alt="Pindr">
+                <span class="footer-brand-name">Pindr</span>
+            </div>
+            <p class="footer-tagline">Your personal dotted journal for Chrome.</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="changelog.html">Changelog</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Pindr. Made with 💖 by Rav.</span>
+        <span>Version 2.1</span>
+    </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const ans  = q.nextElementSibling;
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-a').classList.remove('open');
+        });
+        if (!isOpen) {
+            item.classList.add('open');
+            ans.classList.add('open');
+        }
+    });
+});
+</script>
+</body>
+</html>

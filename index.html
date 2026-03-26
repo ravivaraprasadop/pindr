@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pindr — Your Dotted Journal for Chrome</title>
+    <meta name="description" content="Beautiful sticky boards, tasks, and journaling. Always one click away in Chrome. Free, private, with optional Google Drive sync.">
+    <link rel="stylesheet" href="pindr-site.css">
+    <style>
+        /* ---- HERO SECTION ---- */
+        .hero {
+            min-height: 92vh;
+            display: flex; align-items: center; justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 80px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(45,106,79,0.08) 0%, transparent 70%),
+                        radial-gradient(circle at 80% 80%, rgba(149,213,178,0.12) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-dots {
+            position: absolute; inset: 0;
+            background-image: radial-gradient(circle, rgba(45,106,79,0.15) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+        }
+
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: rgba(45,106,79,0.1); border: 1px solid rgba(45,106,79,0.2);
+            color: var(--leaf); font-size: 12px; font-weight: 600;
+            padding: 5px 14px; border-radius: 20px; margin-bottom: 28px;
+            letter-spacing: 0.04em;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 86px);
+            font-weight: 700;
+            line-height: 1.0;
+            letter-spacing: -2px;
+            color: var(--forest);
+            margin-bottom: 22px;
+            max-width: 760px;
+            animation: fadeUp 0.6s 0.1s ease both;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--sage);
+        }
+
+        .hero-sub {
+            font-size: 18px; color: var(--muted);
+            max-width: 480px; margin: 0 auto 38px;
+            font-weight: 300; line-height: 1.65;
+            animation: fadeUp 0.6s 0.2s ease both;
+        }
+
+        .hero-actions {
+            display: flex; gap: 12px; justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.6s 0.3s ease both;
+        }
+
+        .btn-primary-hero {
+            background: var(--forest); color: white;
+            text-decoration: none; font-weight: 700; font-size: 15px;
+            padding: 14px 28px; border-radius: 10px;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 20px rgba(26,71,49,0.3);
+        }
+        .btn-primary-hero:hover {
+            background: var(--leaf); transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(26,71,49,0.35); color: white;
+        }
+
+        .btn-ghost {
+            background: transparent; color: var(--forest);
+            border: 1.5px solid var(--border);
+            text-decoration: none; font-weight: 600; font-size: 14px;
+            padding: 13px 22px; border-radius: 10px;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .btn-ghost:hover { border-color: var(--sage); background: rgba(45,106,79,0.05); color: var(--forest); }
+
+        .hero-note {
+            font-size: 12px; color: var(--muted); margin-top: 16px;
+            animation: fadeUp 0.6s 0.4s ease both;
+        }
+
+        /* ---- APP PREVIEW ---- */
+        .app-preview {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(0,0,0,0.03);
+            overflow: hidden;
+            max-width: 860px;
+            margin: 60px auto 0;
+            animation: fadeUp 0.8s 0.5s ease both;
+        }
+
+        .preview-bar {
+            background: #f0ede8;
+            padding: 10px 16px;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-r { background: #ff5f57; }
+        .dot-y { background: #ffbd2e; }
+        .dot-g { background: #28c840; }
+        .preview-url {
+            flex: 1; background: white; border: 1px solid var(--border);
+            border-radius: 6px; padding: 3px 10px; font-size: 11px;
+            color: var(--muted); font-family: monospace; margin-left: 8px;
+        }
+
+        .preview-body {
+            background: #f8fafc;
+            background-image: radial-gradient(#d1d5db 1.2px, transparent 1.2px);
+            background-size: 22px 22px;
+            padding: 28px 24px;
+            min-height: 260px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .mock-card {
+            background: white; border: 1px solid #e2e8f0;
+            border-radius: 10px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .mock-header {
+            padding: 10px 12px; font-size: 12px; font-weight: 700;
+            color: #1e293b; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .mock-body { padding: 10px 12px; }
+        .mock-task {
+            display: flex; align-items: center; gap: 7px;
+            margin-bottom: 6px; font-size: 11px; color: #475569;
+        }
+        .mock-cb {
+            width: 13px; height: 13px; border-radius: 3px;
+            border: 1.5px solid #6366f1; flex-shrink: 0;
+        }
+        .mock-cb.done { background: #6366f1; border-color: #6366f1; position: relative; }
+        .mock-cb.done::after { content: '✓'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px; }
+        .mock-task.done span { text-decoration: line-through; color: #94a3b8; }
+
+        /* ---- FEATURES ---- */
+        .features-section { padding: 80px 28px; max-width: 1100px; margin: 0 auto; }
+
+        .features-eyebrow { text-align: center; margin-bottom: 48px; }
+        .features-eyebrow h2 {
+            font-family: var(--font-display); font-size: clamp(28px,4vw,44px);
+            font-weight: 700; letter-spacing: -0.8px; color: var(--forest);
+            margin-bottom: 10px;
+        }
+        .features-eyebrow p { color: var(--muted); font-size: 15px; font-weight: 300; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; margin-bottom: 14px;
+        }
+        .icon-green  { background: #dcfce7; }
+        .icon-purple { background: #ede9fe; }
+        .icon-blue   { background: #dbeafe; }
+        .icon-orange { background: #fef3c7; }
+        .icon-pink   { background: #fce7f3; }
+        .icon-teal   { background: #ccfbf1; }
+
+        .feature-card h3 {
+            font-family: var(--font-display); font-size: 16px;
+            font-weight: 600; color: var(--forest); margin-bottom: 6px;
+        }
+        .feature-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin: 0; }
+
+        /* ---- PRIVACY STRIP ---- */
+        .privacy-strip {
+            background: var(--forest);
+            color: white;
+            padding: 64px 28px;
+            text-align: center;
+        }
+        .privacy-strip h2 {
+            font-family: var(--font-display); font-size: clamp(26px,4vw,40px);
+            font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px;
+        }
+        .privacy-strip p { font-size: 15px; opacity: 0.75; max-width: 480px; margin: 0 auto 32px; font-weight: 300; }
+        .privacy-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .privacy-pill {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; font-size: 13px; font-weight: 600;
+            padding: 8px 16px; border-radius: 30px;
+        }
+
+        /* ---- CTA SECTION ---- */
+        .cta-section {
+            text-align: center; padding: 80px 28px;
+            background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(45,106,79,0.07), transparent);
+        }
+        .cta-section h2 {
+            font-family: var(--font-display); font-size: clamp(28px,4vw,46px);
+            font-weight: 700; letter-spacing: -0.8px; color: var(--forest);
+            margin-bottom: 12px;
+        }
+        .cta-section p { color: var(--muted); font-size: 15px; margin-bottom: 32px; font-weight: 300; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { letter-spacing: -1px; }
+            .features-section, .cta-section { padding: 60px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+        <img src="icons/icon-48.png" alt="Pindr">
+        <span class="nav-brand-name">Pindr</span>
+    </a>
+    <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://chrome.google.com/webstore" target="_blank" class="nav-cta">Add to Chrome →</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-dots"></div>
+    <div class="hero-eyebrow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        Chrome Extension · Free Forever
+    </div>
+    <h1>Your personal<br>dotted <em>journal</em><br>for Chrome</h1>
+    <p class="hero-sub">Calm, focused productivity. Create beautiful boards for tasks, notes, and daily intentions — always one click away.</p>
+    <div class="hero-actions">
+        <a href="https://chrome.google.com/webstore" target="_blank" class="btn-primary-hero">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+            Add to Chrome — Free
+        </a>
+        <a href="about.html" class="btn-ghost">Learn More</a>
+    </div>
+    <p class="hero-note">✓ No account required &nbsp;·&nbsp; ✓ No ads &nbsp;·&nbsp; ✓ Your data, your device</p>
+
+    <div class="app-preview">
+        <div class="preview-bar">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+            <span class="preview-url">chrome-extension://pindr/dashboard.html</span>
+        </div>
+        <div class="preview-body">
+            <div class="mock-card">
+                <div class="mock-header" style="background:#bbf7d0;">🌿 Today's Goals</div>
+                <div class="mock-body">
+                    <div class="mock-task done"><div class="mock-cb done"></div><span>Morning journaling</span></div>
+                    <div class="mock-task done"><div class="mock-cb done"></div><span>Review project notes</span></div>
+                    <div class="mock-task"><div class="mock-cb"></div><span>Design new feature</span></div>
+                    <div class="mock-task"><div class="mock-cb"></div><span>Evening walk</span></div>
+                </div>
+            </div>
+            <div class="mock-card">
+                <div class="mock-header" style="background:#e9d5ff;">💡 Ideas</div>
+                <div class="mock-body">
+                    <div class="mock-task"><div class="mock-cb done"></div><span>Launch page redesign</span></div>
+                    <div class="mock-task"><div class="mock-cb"></div><span>Keyboard shortcuts</span></div>
+                    <div class="mock-task"><div class="mock-cb"></div><span>Dark mode polish</span></div>
+                </div>
+            </div>
+            <div class="mock-card">
+                <div class="mock-header" style="background:#bae6fd;">📚 Reading</div>
+                <div class="mock-body">
+                    <div class="mock-task"><div class="mock-cb done"></div><span>Atomic Habits — ch.7</span></div>
+                    <div class="mock-task"><div class="mock-cb"></div><span>Deep Work — ch.2</span></div>
+                    <div class="mock-task"><div class="mock-cb"></div><span>Newsletter backlog</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+    <div class="features-eyebrow">
+        <h2>Everything you need.<br>Nothing you don't.</h2>
+        <p>Pindr is thoughtfully small — fast to load, easy to use, and beautiful to look at.</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon icon-green">📋</div>
+            <h3>Unlimited Boards</h3>
+            <p>Create as many colour-coded sticky boards as you need. Stored locally — no limits, no subscriptions.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon icon-purple">✅</div>
+            <h3>Checkboxes & Bullets</h3>
+            <p>Toggle between task mode and note mode. Mix them freely within any board.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon icon-teal">☁️</div>
+            <h3>Google Drive Sync</h3>
+            <p>Optional. Sign in with Google and your boards back up directly to <em>your</em> Drive. We never touch your data.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon icon-orange">🌙</div>
+            <h3>3 Beautiful Themes</h3>
+            <p>Light for focus, Dark for night, Ambient — a deep navy inspired by late-night journaling.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon icon-blue">📁</div>
+            <h3>Auto Archive</h3>
+            <p>Previous day's boards are automatically archived at midnight. Your workspace stays clean, your history stays intact.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon icon-pink">🔒</div>
+            <h3>Privacy First</h3>
+            <p>No analytics. No ads. No backend server. Your boards live on your device and nowhere else.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PRIVACY STRIP -->
+<section class="privacy-strip">
+    <h2>Built on trust.</h2>
+    <p>We have no server. We see none of your data. That's not a promise — it's the architecture.</p>
+    <div class="privacy-pills">
+        <span class="privacy-pill">🔒 No Server</span>
+        <span class="privacy-pill">📵 No Analytics</span>
+        <span class="privacy-pill">🚫 No Ads, Ever</span>
+        <span class="privacy-pill">☁️ Your Drive, Your Data</span>
+        <span class="privacy-pill">🗑️ Delete Anytime</span>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Start journaling today.</h2>
+    <p>Free, private, and beautiful. Add Pindr to Chrome in seconds.</p>
+    <a href="https://chrome.google.com/webstore" target="_blank" class="btn-primary-hero" style="display:inline-flex;">
+        Add to Chrome — It's Free →
+    </a>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-brand">
+                <img src="icons/icon-48.png" alt="Pindr">
+                <span class="footer-brand-name">Pindr</span>
+            </div>
+            <p class="footer-tagline">Your personal dotted journal for Chrome. Built with care by Rav.</p>
+        </div>
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="support.html">Support & FAQ</a>
+            <a href="changelog.html">Changelog</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Pindr. Made with 💖 by Rav.</span>
+        <span>Version 2.1</span>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Pindr</title>
+    <meta name="description" content="Pindr's privacy policy. Your data stays on your device. No servers, no analytics, no ads.">
+    <link rel="stylesheet" href="pindr-site.css">
+    <style>
+        .privacy-header {
+            background: linear-gradient(135deg, var(--forest), var(--leaf));
+            color: white; padding: 56px 28px; text-align: center;
+        }
+        .privacy-header img { width: 52px; height: 52px; border-radius: 14px; margin-bottom: 16px; }
+        .privacy-header h1 {
+            font-family: var(--font-display); font-size: clamp(30px, 5vw, 46px);
+            font-weight: 700; letter-spacing: -0.8px; margin-bottom: 10px;
+        }
+        .privacy-header p { font-size: 14px; opacity: 0.8; }
+
+        .permission-row {
+            display: grid; grid-template-columns: auto 1fr;
+            gap: 12px; align-items: start;
+            padding: 12px 0; border-bottom: 1px solid var(--border);
+        }
+        .permission-row:last-child { border-bottom: none; }
+        .perm-name {
+            background: var(--cream); border: 1px solid var(--border);
+            border-radius: 6px; padding: 3px 10px; font-size: 12px;
+            font-family: monospace; font-weight: 600; color: var(--forest);
+            white-space: nowrap; align-self: start; margin-top: 2px;
+        }
+        .perm-desc { font-size: 13px; color: #374151; line-height: 1.65; margin: 0; }
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <a href="index.html" class="nav-brand">
+        <img src="icons/icon-48.png" alt="Pindr">
+        <span class="nav-brand-name">Pindr</span>
+    </a>
+    <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="privacy.html" class="active">Privacy</a>
+        <a href="support.html">Support</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://chrome.google.com/webstore" target="_blank" class="nav-cta">Add to Chrome →</a>
+    </div>
+</nav>
+
+<div class="privacy-header">
+    <img src="icons/icon-128.png" alt="Pindr">
+    <h1>Privacy Policy</h1>
+    <p>Last updated: March 2026 &nbsp;·&nbsp; Pindr : To-Do Journal v2.1</p>
+</div>
+
+<div class="page-wrap">
+    <div class="highlight-box">
+        🛡️ <span><strong>Short version:</strong> Pindr has no backend server. The developer cannot see any of your data. Your notes live on your device — or optionally in your own Google Drive.</span>
+    </div>
+
+    <div class="card">
+        <h2>📋 Overview</h2>
+        <p>Pindr ("the Extension") is a personal to-do journal and sticky-note manager for Chrome. This policy explains what data the extension handles and how it is stored.</p>
+        <p>Pindr is designed with a <strong>privacy-first philosophy:</strong> no data ever leaves your own device or your own Google account.</p>
+    </div>
+
+    <div class="card">
+        <h2>💾 Data Stored Locally</h2>
+        <p>All boards, notes, tasks, and settings are stored in your browser using Chrome's built-in <code>chrome.storage.local</code> API. This includes:</p>
+        <ul>
+            <li>Board titles and content (text, checkboxes, bullet points)</li>
+            <li>Board colours, pin state, and timestamps</li>
+            <li>Archived boards from previous days</li>
+            <li>Deleted boards temporarily in Trash (up to 7 days)</li>
+            <li>Your theme preference and display settings</li>
+        </ul>
+        <p>This data is stored <strong>only on your device</strong> and is never sent to any server controlled by Pindr's developer.</p>
+    </div>
+
+    <div class="card">
+        <h2>☁️ Optional Google Drive Sync</h2>
+        <p>Pindr offers an <strong>optional</strong> feature to back up your data to your own Google Drive. This feature:</p>
+        <ul>
+            <li>Is entirely <strong>opt-in</strong> — you must explicitly sign in with Google to enable it</li>
+            <li>Saves a single file (<code>pindr-data.json</code>) directly to <em>your</em> Google Drive</li>
+            <li>Only requests the <code>drive.file</code> scope — Pindr can only access files it has created; it cannot read any other files in your Drive</li>
+            <li>Uses Google's official OAuth 2.0 via <code>chrome.identity</code> — no passwords seen or stored by Pindr</li>
+        </ul>
+        <p>The developer <strong>cannot</strong> access your Google Drive, email, boards, or any synced data.</p>
+    </div>
+
+    <div class="card">
+        <h2>👤 Google Account Information</h2>
+        <p>When you optionally sign in with Google, Pindr fetches basic profile info (name and photo) from Google's OAuth endpoint. This information is:</p>
+        <ul>
+            <li>Stored only in <code>chrome.storage.local</code> on your device</li>
+            <li>Used solely to display your name and avatar in the extension header</li>
+            <li>Never sent to any third-party server</li>
+            <li>Immediately cleared when you sign out</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🚫 What We Do NOT Do</h2>
+        <ul>
+            <li>❌ We do not collect analytics or usage statistics</li>
+            <li>❌ We do not serve advertisements</li>
+            <li>❌ We do not share data with third parties</li>
+            <li>❌ We do not have a backend server</li>
+            <li>❌ We do not track your browsing activity</li>
+            <li>❌ We do not read files outside of the <code>pindr-data.json</code> file you authorise</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🔑 Permissions Explained</h2>
+        <div class="permission-row">
+            <span class="perm-name">storage</span>
+            <p class="perm-desc">Saves your boards and settings locally on your device.</p>
+        </div>
+        <div class="permission-row">
+            <span class="perm-name">unlimitedStorage</span>
+            <p class="perm-desc">Ensures your boards are not automatically deleted by Chrome when disk space is low.</p>
+        </div>
+        <div class="permission-row">
+            <span class="perm-name">alarms</span>
+            <p class="perm-desc">Powers the daily midnight board archiving and optional 30-minute auto-sync intervals.</p>
+        </div>
+        <div class="permission-row">
+            <span class="perm-name">notifications</span>
+            <p class="perm-desc">Used only for task timer completion alerts when you set a timer on a task.</p>
+        </div>
+        <div class="permission-row">
+            <span class="perm-name">identity</span>
+            <p class="perm-desc">Required for the optional Google Sign-In flow. Only contacted when you choose to sign in.</p>
+        </div>
+        <div class="permission-row">
+            <span class="perm-name">googleapis.com</span>
+            <p class="perm-desc">Required for optional Google Drive sync. Only contacted when you are signed in and sync is active.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>🗑️ Deleting Your Data</h2>
+        <p>You can delete all data at any time:</p>
+        <ul>
+            <li>In Pindr: <strong>Settings → Sync & Data → Clear all boards</strong></li>
+            <li>In Chrome: <em>chrome://extensions → Pindr → Details → Clear site data</em></li>
+            <li>Uninstalling the extension removes all locally stored data automatically</li>
+            <li>If you used Drive sync: delete <code>pindr-data.json</code> from your Google Drive</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>📬 Contact</h2>
+        <p>Questions about this policy? Contact the developer through the <a href="https://chrome.google.com/webstore" target="_blank">Chrome Web Store listing page</a>.</p>
+        <p style="margin-top:8px;font-size:13px;color:var(--muted);">This policy applies to Pindr : To-Do Journal (Chrome Extension). Last reviewed March 2026.</p>
+    </div>
+</div>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div>
+            <div class="footer-brand">
+                <img src="icons/icon-48.png" alt="Pindr">
+                <span class="footer-brand-name">Pindr</span>
+            </div>
+            <p class="footer-tagline">Your personal dotted journal for Chrome.</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="support.html">Support</a>
+            <a href="changelog.html">Changelog</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Pindr. Made with 💖 by Rav.</span>
+        <span>Version 2.1</span>
+    </div>
+</footer>
+
+</body>
+</html>
