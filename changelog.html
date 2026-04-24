@@ -3,175 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Changelog — Pindr</title>
-    <meta name="description" content="Every update and improvement to Pindr — the full version history.">
-    <link rel="stylesheet" href="pindr-site.css">
+    <title>Pindr — Changelog</title>
     <style>
-        .changelog-header {
-            background: linear-gradient(135deg, #1a4731, #2d6a4f);
-            color: white; padding: 56px 28px; text-align: center;
-        }
-        .changelog-header h1 {
-            font-family: var(--font-display); font-size: clamp(30px,5vw,46px);
-            font-weight: 700; letter-spacing: -0.8px; margin-bottom: 10px;
-        }
-        .changelog-header p { opacity: 0.8; font-size: 15px; }
-
-        .timeline {
-            position: relative; padding-left: 32px; margin-top: 8px;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute; left: 10px; top: 12px; bottom: 0;
-            width: 2px; background: var(--border);
-        }
-
-        .version-block { position: relative; margin-bottom: 44px; }
-
-        .version-dot {
-            position: absolute; left: -28px; top: 8px;
-            width: 14px; height: 14px; border-radius: 50%;
-            background: var(--leaf); border: 2px solid white;
-            box-shadow: 0 0 0 2px var(--leaf);
-        }
-        .version-dot.latest {
-            background: #22c55e;
-            box-shadow: 0 0 0 2px #22c55e, 0 0 12px rgba(34,197,94,0.3);
-        }
-
-        .version-header {
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 14px; flex-wrap: wrap;
-        }
-        .version-number {
-            font-family: var(--font-display); font-size: 22px;
-            font-weight: 700; color: var(--forest);
-        }
-        .version-date { font-size: 12px; color: var(--muted); font-weight: 500; }
-
+        :root { --primary: #6366f1; --text: #1e293b; --muted: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .page { max-width: 700px; margin: 0 auto; padding: 48px 24px 80px; }
+        .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+        .brand img { width: 36px; height: 36px; border-radius: 9px; }
+        .brand-name { font-size: 22px; font-weight: 800; }
+        h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 36px; }
+        .timeline { position: relative; padding-left: 28px; }
+        .timeline::before { content: ''; position: absolute; left: 8px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+        .version-block { position: relative; margin-bottom: 36px; }
+        .version-dot { position: absolute; left: -24px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 2px solid white; box-shadow: 0 0 0 2px var(--primary); }
+        .version-dot.latest { background: #22c55e; box-shadow: 0 0 0 2px #22c55e; }
+        .version-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .version-number { font-size: 18px; font-weight: 800; }
+        .version-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+        .badge-latest { background: #dcfce7; color: #166534; }
+        .badge-stable { background: #eff6ff; color: #1d4ed8; }
+        .version-date { font-size: 12px; color: var(--muted); }
         .change-list { list-style: none; padding: 0; }
-        .change-list li {
-            font-size: 14px; padding: 7px 0;
-            display: grid; grid-template-columns: 20px 1fr;
-            gap: 8px; border-bottom: 1px solid var(--border);
-            color: #374151; line-height: 1.55;
-        }
-        .change-list li:last-child { border-bottom: none; }
-        .change-list li .li-icon { text-align: center; margin-top: 1px; }
+        .change-list li { font-size: 14px; padding: 4px 0; display: flex; gap: 8px; }
+        .change-list li::before { content: attr(data-icon); flex-shrink: 0; }
+        .footer-nav { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+        .footer-nav a { color: var(--primary); font-size: 13px; font-weight: 600; text-decoration: none; }
+        .footer-nav a:hover { text-decoration: underline; }
+        .made-with { text-align: center; margin-top: 40px; font-size: 12px; color: var(--muted); }
     </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon-16.png">
+    <link rel="apple-touch-icon" href="icon-128.png">
 </head>
 <body>
+    <div class="page">
+        <div class="brand">
+            <img src="icon-48.png" alt="Pindr">
+            <span class="brand-name">Pindr</span>
+        </div>
 
-<nav class="site-nav">
-    <a href="index.html" class="nav-brand">
-        <img src="icons/icon-48.png" alt="Pindr">
-        <span class="nav-brand-name">Pindr</span>
-    </a>
-    <div class="nav-links">
-        <a href="about.html">About</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="support.html">Support</a>
-        <a href="changelog.html" class="active">Changelog</a>
-        <a href="https://chrome.google.com/webstore" target="_blank" class="nav-cta">Add to Chrome →</a>
-    </div>
-</nav>
+        <h1>Changelog</h1>
+        <p class="subtitle">Every update, every improvement — the full history of Pindr.</p>
 
-<div class="changelog-header">
-    <h1>Changelog</h1>
-    <p>Every update, every improvement — the full history of Pindr.</p>
-</div>
+        <div class="timeline">
 
-<div class="page-wrap">
-    <div class="timeline">
-
-        <div class="version-block">
-            <div class="version-dot latest"></div>
-            <div class="version-header">
-                <span class="version-number">v2.1</span>
-                <span class="badge badge-latest">Latest</span>
-                <span class="version-date">March 2026</span>
-            </div>
-            <div class="card" style="margin:0;">
+            <div class="version-block">
+                <div class="version-dot latest"></div>
+                <div class="version-header">
+                    <span class="version-number">v2.1</span>
+                    <span class="version-badge badge-latest">Latest</span>
+                    <span class="version-date">March 2026</span>
+                </div>
                 <ul class="change-list">
-                    <li><span class="li-icon">✨</span><span>New <strong>Ambient</strong> theme — deep navy, inspired by late-night journaling</span></li>
-                    <li><span class="li-icon">☁️</span><span>Auto-sync to Google Drive every 30 minutes via background service worker</span></li>
-                    <li><span class="li-icon">🔒</span><span>Token auto-refresh and 401 detection — stale sessions cleared gracefully</span></li>
-                    <li><span class="li-icon">📌</span><span>Pin any board for instant popup access without opening the workspace</span></li>
-                    <li><span class="li-icon">🕐</span><span>Live clock added to popup header</span></li>
-                    <li><span class="li-icon">⚙️</span><span>New <strong>Settings modal</strong> with theme picker, data management, and sync controls</span></li>
-                    <li><span class="li-icon">🐛</span><span>Fixed: checkboxes now persist state correctly across popup and workspace</span></li>
-                    <li><span class="li-icon">🐛</span><span>Fixed: archive midnight trigger fires correctly on browser startup</span></li>
-                    <li><span class="li-icon">🐛</span><span>Fixed: colour picker no longer closes immediately on click</span></li>
-                    <li><span class="li-icon">🐛</span><span>Fixed: content no longer vanishes after refresh — blur + debounced save</span></li>
+                    <li data-icon="✨">New "Ambient" theme — deep navy, inspired by late-night journaling</li>
+                    <li data-icon="☁️">Auto-sync to Google Drive every 30 minutes (background service worker)</li>
+                    <li data-icon="🔒">Token auto-refresh and 401 detection — stale sessions now cleared gracefully</li>
+                    <li data-icon="📌">Pin any board for instant popup access — no workspace needed</li>
+                    <li data-icon="🕐">Live clock in popup header</li>
+                    <li data-icon="⚙️">New Settings modal: theme picker, data management, sync controls</li>
+                    <li data-icon="🔧">Coming Soon modal — sneak peek at v2.2 features</li>
+                    <li data-icon="🐛">Fixed: checkboxes persisting state correctly across popup and workspace</li>
+                    <li data-icon="🐛">Fixed: archive midnight trigger firing correctly on browser startup</li>
                 </ul>
             </div>
-        </div>
 
-        <div class="version-block">
-            <div class="version-dot"></div>
-            <div class="version-header">
-                <span class="version-number">v2.0</span>
-                <span class="badge badge-blue">Stable</span>
-                <span class="version-date">January 2026</span>
-            </div>
-            <div class="card" style="margin:0;">
+            <div class="version-block">
+                <div class="version-dot"></div>
+                <div class="version-header">
+                    <span class="version-number">v2.0</span>
+                    <span class="version-badge badge-stable">Stable</span>
+                    <span class="version-date">January 2026</span>
+                </div>
                 <ul class="change-list">
-                    <li><span class="li-icon">🎨</span><span>Complete UI overhaul — dotted journal aesthetic with 3 themes</span></li>
-                    <li><span class="li-icon">☁️</span><span>Google Drive sync — optional backup directly to your personal Drive</span></li>
-                    <li><span class="li-icon">👤</span><span>Google Sign-In with profile avatar display</span></li>
-                    <li><span class="li-icon">🗑️</span><span>Trash bin — deleted boards held for 7 days</span></li>
-                    <li><span class="li-icon">📁</span><span>Auto-archive — previous day's boards archived at midnight</span></li>
-                    <li><span class="li-icon">📤</span><span>Export & Import — full JSON backup and restore</span></li>
-                    <li><span class="li-icon">⏱️</span><span>Task timer with Chrome notifications</span></li>
-                    <li><span class="li-icon">🎨</span><span>10 board colour themes: matcha, crimson, lavender, ocean, and more</span></li>
-                    <li><span class="li-icon">🏗️</span><span>Migrated to Manifest v3 (required by Chrome)</span></li>
+                    <li data-icon="🎨">Complete UI overhaul — dotted journal aesthetic with 3 themes</li>
+                    <li data-icon="☁️">Google Drive sync — optional backup to your personal Drive</li>
+                    <li data-icon="👤">Google Sign-In with profile avatar display</li>
+                    <li data-icon="🗑️">Trash bin — deleted boards held for 7 days</li>
+                    <li data-icon="📁">Auto-archive — previous day boards archived at midnight</li>
+                    <li data-icon="📤">Export & Import — full JSON backup and restore</li>
+                    <li data-icon="⏱️">Task timer with Chrome notifications</li>
+                    <li data-icon="🎨">10 board colour themes: matcha, crimson, lavender, ocean, and more</li>
+                    <li data-icon="🏗️">Migrated to Manifest v3 (required by Chrome)</li>
                 </ul>
             </div>
-        </div>
 
-        <div class="version-block">
-            <div class="version-dot"></div>
-            <div class="version-header">
-                <span class="version-number">v1.0</span>
-                <span class="badge badge-green">Original</span>
-                <span class="version-date">2025</span>
-            </div>
-            <div class="card" style="margin:0;">
+            <div class="version-block">
+                <div class="version-dot"></div>
+                <div class="version-header">
+                    <span class="version-number">v1.0</span>
+                    <span class="version-badge badge-stable">Original</span>
+                    <span class="version-date">2025</span>
+                </div>
                 <ul class="change-list">
-                    <li><span class="li-icon">🌱</span><span>First release of Pindr</span></li>
-                    <li><span class="li-icon">📋</span><span>Basic sticky board creation and editing</span></li>
-                    <li><span class="li-icon">✅</span><span>Checkbox and bullet point task modes</span></li>
-                    <li><span class="li-icon">💾</span><span>Local storage with <code>chrome.storage.local</code></span></li>
-                    <li><span class="li-icon">🌙</span><span>Light and dark themes</span></li>
+                    <li data-icon="🌱">First release of Pindr</li>
+                    <li data-icon="📋">Basic sticky board creation and editing</li>
+                    <li data-icon="✅">Checkbox and bullet point task modes</li>
+                    <li data-icon="💾">Local storage with chrome.storage.local</li>
+                    <li data-icon="🌙">Light and dark themes</li>
                 </ul>
             </div>
+
         </div>
 
-    </div>
-</div>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div>
-            <div class="footer-brand">
-                <img src="icons/icon-48.png" alt="Pindr">
-                <span class="footer-brand-name">Pindr</span>
-            </div>
-            <p class="footer-tagline">Your personal dotted journal for Chrome.</p>
-        </div>
-        <div class="footer-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
+        <div class="footer-nav">
+            <a href="about.html">About Pindr</a>
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Use</a>
-            <a href="support.html">Support</a>
+            <a href="support.html">Support & FAQ</a>
+            <a href="dashboard.html">← Back to App</a>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <span>© 2026 Pindr. Made with 💖 by Rav.</span>
-        <span>Version 2.1</span>
-    </div>
-</footer>
 
+        <p class="made-with">Made with 💖 by Rav</p>
+    </div>
 </body>
 </html>
