@@ -3,204 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Pindr — Your Dotted Journal for Chrome</title>
-    <meta name="description" content="Learn about Pindr — the beautiful, privacy-first dotted journal Chrome extension built by Rav.">
-    <link rel="stylesheet" href="pindr-site.css">
+    <title>Pindr — About</title>
     <style>
-        .about-hero {
-            text-align: center;
-            padding: 72px 24px 56px;
-            position: relative;
-        }
-        .about-hero::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(45,106,79,0.07), transparent);
-            pointer-events: none;
-        }
-        .about-hero img {
-            width: 88px; height: 88px; border-radius: 22px;
-            box-shadow: 0 12px 40px rgba(26,71,49,0.2);
-            margin-bottom: 20px;
-        }
-        .about-hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(38px, 6vw, 56px);
-            font-weight: 700; letter-spacing: -1px;
-            color: var(--forest); margin-bottom: 12px;
-        }
-        .about-hero p {
-            font-size: 16px; color: var(--muted);
-            max-width: 440px; margin: 0 auto 20px;
-            font-weight: 300;
-        }
-        .about-hero .badge { margin: 0 4px; }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 14px; margin-top: 4px;
-        }
-        .feature-item {
-            background: var(--cream); border: 1px solid var(--border);
-            border-radius: 10px; padding: 16px;
-            display: flex; align-items: flex-start; gap: 12px;
-        }
-        .feature-item .fi-icon {
-            font-size: 22px; flex-shrink: 0; margin-top: 1px;
-        }
-        .feature-item strong { display: block; font-size: 13px; font-weight: 700; color: var(--forest); margin-bottom: 2px; }
-        .feature-item span { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-        .values-grid {
-            display: flex; gap: 10px; flex-wrap: wrap;
-        }
-        .value-pill {
-            background: linear-gradient(135deg, rgba(45,106,79,0.08), rgba(82,183,136,0.08));
-            border: 1px solid rgba(45,106,79,0.2);
-            color: var(--leaf); font-size: 13px; font-weight: 600;
-            padding: 7px 16px; border-radius: 30px;
-        }
-
-        .cta-card {
-            background: linear-gradient(135deg, var(--forest), var(--leaf));
-            border-radius: var(--radius); padding: 36px;
-            text-align: center; color: white; margin-top: 24px;
-        }
-        .cta-card h2 { font-family: var(--font-display); font-size: 22px; margin-bottom: 8px; }
-        .cta-card p { font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
-        .cta-card a {
-            display: inline-block; background: white; color: var(--forest);
-            font-weight: 700; font-size: 14px; padding: 11px 24px;
-            border-radius: 8px; text-decoration: none;
-            transition: transform 0.15s, box-shadow 0.15s;
-        }
-        .cta-card a:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        :root { --primary: #6366f1; --text: #1e293b; --muted: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .page { max-width: 700px; margin: 0 auto; padding: 48px 24px 80px; }
+        .hero { text-align: center; padding: 40px 0 48px; }
+        .hero img { width: 80px; height: 80px; border-radius: 20px; margin-bottom: 18px; box-shadow: 0 8px 30px rgba(99,102,241,0.25); }
+        .hero h1 { font-size: 36px; font-weight: 900; margin-bottom: 6px; }
+        .hero .tagline { font-size: 16px; color: var(--muted); margin-bottom: 18px; }
+        .hero .version-badge { display: inline-block; background: linear-gradient(135deg, var(--primary), #8b5cf6); color: white; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; margin-bottom: 20px; }
+        .card h2 { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--primary); }
+        .card p, .card li { font-size: 14px; margin-bottom: 10px; }
+        .card ul { padding-left: 20px; }
+        .card li { margin-bottom: 6px; }
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .feature-item { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+        .feature-icon { font-size: 20px; flex-shrink: 0; }
+        .feature-item strong { display: block; font-size: 13px; font-weight: 700; }
+        .feature-item span { font-size: 12px; color: var(--muted); }
+        .values { display: flex; gap: 12px; flex-wrap: wrap; }
+        .value-pill { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 1px solid #bae6fd; color: #0369a1; font-size: 13px; font-weight: 600; padding: 7px 16px; border-radius: 30px; }
+        .footer-nav { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+        .footer-nav a { color: var(--primary); font-size: 13px; font-weight: 600; text-decoration: none; }
+        .footer-nav a:hover { text-decoration: underline; }
+        @media (max-width: 480px) { .feature-grid { grid-template-columns: 1fr; } }
     </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon-16.png">
+    <link rel="apple-touch-icon" href="icon-128.png">
 </head>
 <body>
+    <div class="page">
+        <div class="hero">
+            <img src="icon-128.png" alt="Pindr logo">
+            <h1>Pindr</h1>
+            <p class="tagline">Your personal dotted journal for the browser</p>
+            <span class="version-badge">Version 2.1</span>
+        </div>
 
-<nav class="site-nav">
-    <a href="index.html" class="nav-brand">
-        <img src="icons/icon-48.png" alt="Pindr">
-        <span class="nav-brand-name">Pindr</span>
-    </a>
-    <div class="nav-links">
-        <a href="about.html" class="active">About</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="support.html">Support</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="https://chrome.google.com/webstore" target="_blank" class="nav-cta">Add to Chrome →</a>
-    </div>
-</nav>
+        <div class="card">
+            <h2>✨ What is Pindr?</h2>
+            <p>Pindr is a beautiful, minimalist to-do journal that lives in your Chrome browser. Create sticky boards for anything — tasks, quick notes, grocery lists, journaling, daily intentions — and have them always one click away.</p>
+            <p>Inspired by dotted bullet journals, Pindr brings the calm and clarity of analog journaling into your digital workflow.</p>
+        </div>
 
-<div class="page-wrap">
-    <div class="about-hero">
-        <img src="icons/icon-128.png" alt="Pindr">
-        <h1>Pindr</h1>
-        <p>Your personal dotted journal for the browser</p>
-        <span class="badge badge-latest">Version 2.1</span>
-        <span class="badge badge-green">Free Forever</span>
-    </div>
-
-    <div class="card">
-        <h2>✨ What is Pindr?</h2>
-        <p>Pindr is a beautiful, minimalist to-do journal that lives in your Chrome browser. Create sticky boards for tasks, quick notes, grocery lists, journaling, and daily intentions — always one click away from the toolbar.</p>
-        <p>Inspired by the calm clarity of dotted bullet journals, Pindr brings that same focused energy to your digital workflow — without the clutter of heavy productivity apps.</p>
-    </div>
-
-    <div class="card">
-        <h2>🛠️ Features</h2>
-        <div class="feature-grid">
-            <div class="feature-item">
-                <span class="fi-icon">📋</span>
-                <div><strong>Unlimited Boards</strong><span>Colour-coded sticky boards for anything</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">✅</span>
-                <div><strong>Checkboxes & Bullets</strong><span>Toggle modes or mix freely in any board</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">📌</span>
-                <div><strong>Pin a Board</strong><span>Instant popup access without opening workspace</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">🌙</span>
-                <div><strong>3 Themes</strong><span>Light, Dark, and Ambient (deep navy)</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">📁</span>
-                <div><strong>Auto Archive</strong><span>Previous day boards archived at midnight</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">☁️</span>
-                <div><strong>Google Drive Sync</strong><span>Optional backup to your personal Drive</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">🗑️</span>
-                <div><strong>Trash Bin</strong><span>Deleted boards held 7 days before purge</span></div>
-            </div>
-            <div class="feature-item">
-                <span class="fi-icon">📤</span>
-                <div><strong>Export / Import</strong><span>Full JSON backup and restore anytime</span></div>
+        <div class="card">
+            <h2>🛠️ Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <div><strong>Boards</strong><span>Create unlimited colour-coded sticky boards</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <div><strong>Checkboxes & Bullets</strong><span>Toggle modes or mix freely in any board</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📌</span>
+                    <div><strong>Pin a Board</strong><span>Pin one board for instant popup access</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌙</span>
+                    <div><strong>3 Themes</strong><span>Light, Dark, and Ambient (deep navy)</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📁</span>
+                    <div><strong>Auto Archive</strong><span>Previous day's boards archive at midnight</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">☁️</span>
+                    <div><strong>Google Drive Sync</strong><span>Optional backup to your personal Drive</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🗑️</span>
+                    <div><strong>Trash Bin</strong><span>Deleted boards held for 7 days before purge</span></div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📤</span>
+                    <div><strong>Export / Import</strong><span>Full JSON backup and restore anytime</span></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>💙 Our Values</h2>
-        <div class="values-grid">
-            <span class="value-pill">🔒 Privacy First</span>
-            <span class="value-pill">🚫 No Ads Ever</span>
-            <span class="value-pill">☁️ Your Data, Your Drive</span>
-            <span class="value-pill">⚡ Fast & Lightweight</span>
-            <span class="value-pill">🎨 Beautiful by Default</span>
-            <span class="value-pill">🛠️ Built with Care</span>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>🔐 Privacy Promise</h2>
-        <p>Pindr is built on one simple promise: <strong>your notes are yours.</strong> The extension has no backend server. The developer cannot see your boards, your email, or any data you create.</p>
-        <p>When you enable Google Drive sync, your data travels directly from your browser to your own Google account — Pindr is merely the messenger, never the recipient.</p>
-        <a href="privacy.html" style="font-size:13px;font-weight:600;">Read the full Privacy Policy →</a>
-    </div>
-
-    <div class="card">
-        <h2>👤 About the Developer</h2>
-        <p>Pindr is built and maintained by Rav — a solo developer who wanted a journaling tool that was beautiful, fast, private, and free. Every feature exists because it was needed personally.</p>
-        <p>Found a bug? Have an idea? Feedback is genuinely welcome via the Chrome Web Store listing.</p>
-    </div>
-
-    <div class="cta-card">
-        <h2>Ready to start journaling?</h2>
-        <p>Add Pindr to Chrome in seconds — free, private, no sign-up required.</p>
-        <a href="https://chrome.google.com/webstore" target="_blank">Add to Chrome →</a>
-    </div>
-</div>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div>
-            <div class="footer-brand">
-                <img src="icons/icon-48.png" alt="Pindr">
-                <span class="footer-brand-name">Pindr</span>
+        <div class="card">
+            <h2>💙 Our Values</h2>
+            <div class="values">
+                <span class="value-pill">🔒 Privacy First</span>
+                <span class="value-pill">🚫 No Ads Ever</span>
+                <span class="value-pill">☁️ Your Data, Your Drive</span>
+                <span class="value-pill">⚡ Fast & Lightweight</span>
+                <span class="value-pill">🎨 Beautiful by Default</span>
+                <span class="value-pill">🛠️ Built with Care</span>
             </div>
-            <p class="footer-tagline">Your personal dotted journal for Chrome. Built with care by Rav.</p>
         </div>
-        <div class="footer-links">
-            <a href="index.html">Home</a>
+
+        <div class="card">
+            <h2>🔐 Privacy Commitment</h2>
+            <p>Pindr is built on a simple promise: <strong>your notes are yours</strong>. The extension has no backend server. The developer cannot see your boards, your email, or any data you create.</p>
+            <p>When you enable Google Drive sync, your data goes directly from your browser to your own Google account — Pindr is merely the messenger.</p>
+        </div>
+
+        <div class="card">
+            <h2>📬 Support & Feedback</h2>
+            <p>Found a bug? Have a feature idea? You can reach the developer through the Chrome Web Store listing page. Your feedback directly shapes future versions of Pindr.</p>
+        </div>
+
+        <div class="footer-nav">
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Use</a>
             <a href="support.html">Support & FAQ</a>
             <a href="changelog.html">Changelog</a>
+            <a href="dashboard.html">← Back to App</a>
         </div>
+        <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--muted);">Made with 💖 by Rav</p>
     </div>
-    <div class="footer-bottom">
-        <span>© 2026 Pindr. Made with 💖 by Rav.</span>
-        <span>Version 2.1</span>
-    </div>
-</footer>
-
 </body>
 </html>
